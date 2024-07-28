@@ -7,7 +7,7 @@ const mongoose = require('mongoose')
 const MONGODB_URI = process.env.MONGODB_URI
 //initialize the server
 const app = express()
-app.use(morgan('dev'))
+app.use(logger('dev'))
 
 const Movie = require('./models/movie')
 
@@ -19,3 +19,11 @@ mongoose.connection.on('connected', () =>{
 app.listen(3000, () =>{
     console.log('Port 3000 is active')
 })
+
+//* READ
+// GET Requests
+app.get('/test', async (req, res) =>{
+    res.send('Your data my sir')
+    console.log(`${req.path} page`) 
+})
+
