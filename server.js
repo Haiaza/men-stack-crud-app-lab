@@ -23,7 +23,7 @@ app.listen(3000, () =>{
 //* READ
 // GET Requests
 app.get('/test', async (req, res) =>{
-    res.send('Your data my sir')
+    res.render('./movies/test.ejs')
     console.log(`${req.path} page`) 
 })
 
