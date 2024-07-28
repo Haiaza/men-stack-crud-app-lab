@@ -25,5 +25,8 @@ app.listen(3000, () =>{
 app.get('/test', async (req, res) =>{
     res.render('./movies/test.ejs')
     console.log(`${req.path} page`) 
-})
+})              
 
+app.get('/movies/new', async (req, res) =>{
+    res.render('new.ejs')
+})
