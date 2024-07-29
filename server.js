@@ -8,6 +8,7 @@ const MONGODB_URI = process.env.MONGODB_URI
 //initialize the server
 const app = express()
 app.use(logger('dev'))
+app.use(express.urlencoded({ extended: false }))
 
 const Movie = require('./models/movie')
 
@@ -18,6 +19,21 @@ mongoose.connection.on('connected', () =>{
 
 app.listen(3000, () =>{
     console.log('Port 3000 is active')
+})
+
+//* CREATE
+// POST Requests
+app.post('/movies', async (req, res) =>{
+    if (req.body.snooze === 'on') {
+        req.body.snooze = false
+    } else {
+        req.body.snooze = true
+    }
+    await Movie.create(req.body
+        
+    )
+    console.log(req.body)
+    res.redirect('/movies/new')
 })
 
 //* READ
