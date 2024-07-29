@@ -38,11 +38,17 @@ app.post('/movies', async (req, res) =>{
 
 //* READ
 // GET Requests
-app.get('/test', async (req, res) =>{
-    res.render('./movies/test.ejs')
-    console.log(`${req.path} page`) 
-})              
+app.get('/movies', async (req, res) =>{
+    const allMovies = await Movie.find()
+    console.log(allMovies)
+    res.send("Index page message")
+})
 
 app.get('/movies/new', async (req, res) =>{
     res.render('new.ejs')
 })
+/* Graveyard*/
+// app.get('/test', async (req, res) =>{
+//     res.render('./movies/test.ejs')
+//     console.log(`${req.path} page`) 
+// })              
