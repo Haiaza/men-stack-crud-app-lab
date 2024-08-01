@@ -71,8 +71,23 @@ app.delete('/movies/:id', async (req, res) =>{
     res.redirect('/movies')
 })
 
-
+//* Edit
 app.get('/movies/:id/edit', async (req, res) =>{
     const selectedMovie = await Movie.findById(req.params.id)
-    res.send(`This is the edit route for ${selectedMovie.name}`)
+    res.render('movies/edit.ejs', {
+        movie : selectedMovie
+    })
+})
+
+//* Update
+app.put('/movies/:id', async (req, res) =>{
+    if (req.body.snooze === 'on') {
+        req.body.snooze = true;
+    } else {
+        req.body.snooze = false;
+    }
+
+    await Movie.findByIdAndUpdate(req.params.id, req.body)
+
+    res.redirect(`/movies/${req.params.id}`)
 })
