@@ -66,12 +66,13 @@ app.get('/movies/:id', async (req, res) =>{
 
 
 //* Delete
-app.delete('/movies/:id', (req, res) =>{
-    res.send(`Were targetting ${req.params.id   } for deletion`)
+app.delete('/movies/:id', async (req, res) =>{
+    await Movie.findByIdAndDelete(req.params.id)
+    res.redirect('/movies')
 })
 
-/* Graveyard*/
-// app.get('/test', async (req, res) =>{
-//     res.render('./movies/test.ejs')
-//     console.log(`${req.path} page`) 
-// })              
+
+app.get('/movies/:id/edit', async (req, res) =>{
+    const selectedMovie = await Movie.findById(req.params.id)
+    res.send(`This is the edit route for ${selectedMovie.name}`)
+})
