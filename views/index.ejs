@@ -6,7 +6,17 @@
     <title>Movies App</title>
   </head>
   <body>
+    // Create
+    <a href="/movies/new">Add a new Movie!</a>
     <h1>Welcome to the Movies app!</h1>
-    <p>An app for collecting the latest movies.</p>
+    <h2>All movies</h2>
+    <ul>
+      <% movies.forEach((movie) => { %>
+          <li>
+            <a href="/movies/<%= movie._id %>"></a>
+            <%= movie.name %>
+          </li>
+      <% }); %>
+    </ul>
   </body>
 </html>

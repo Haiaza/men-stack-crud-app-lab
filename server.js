@@ -38,14 +38,28 @@ app.post('/movies', async (req, res) =>{
 
 //* READ
 // GET Requests
+//* Index
 app.get('/movies', async (req, res) =>{
     const allMovies = await Movie.find()
     console.log(allMovies)
-    res.send("Index page message")
+    res.render("index.ejs", {
+        movies : allMovies
+    })
 })
-
+//* New
 app.get('/movies/new', async (req, res) =>{
     res.render('new.ejs')
+})
+// *Show
+app.get('/movies/:id', async (req, res) =>{
+    try {
+        const theMovie = await Movie.findOne({_id: req.params.id })
+        res.render('show.ejs', {
+            movie: theMovie
+        })
+    } catch (error) {
+        res.status(400).json({ msg: error.messsage })
+    }
 })
 /* Graveyard*/
 // app.get('/test', async (req, res) =>{
