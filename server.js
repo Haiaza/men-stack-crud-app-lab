@@ -4,11 +4,13 @@ dotenv.config() // loading the enviornment variables
 const express = require('express')
 const logger = require('morgan')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
 const MONGODB_URI = process.env.MONGODB_URI
 //initialize the server
 const app = express()
 app.use(logger('dev'))
 app.use(express.urlencoded({ extended: false }))
+app.use(methodOverride('_method'))
 
 const Movie = require('./models/movie')
 
@@ -61,6 +63,13 @@ app.get('/movies/:id', async (req, res) =>{
         res.status(400).json({ msg: error.messsage })
     }
 })
+
+
+//* Delete
+app.delete('/movies/:id', (req, res) =>{
+    res.send(`Were targetting ${req.params.id   } for deletion`)
+})
+
 /* Graveyard*/
 // app.get('/test', async (req, res) =>{
 //     res.render('./movies/test.ejs')
